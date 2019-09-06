@@ -32,3 +32,5 @@ As the project was built in a short amount of time and had to learn python from 
  - [http://ez-health.herokuapp.com/](http://ez-health.herokuapp.com/) > (Skillenza hackathon)
  - [https://www.clayworks.space/](https://www.clayworks.space/)
  
+## Purge
+As i was unsure of the logging feature I've implemented a purge.py file that deletes data in tables and can be run using crontab to delete data every 7 days.
