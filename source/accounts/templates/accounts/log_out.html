@@ -1,0 +1,17 @@
+{% extends 'layouts/default/page.html' %}
+
+{% load i18n %}
+
+{% block content %}
+
+    <h4>{% trans 'You have been Logged out' %}</h4>
+
+    <p>
+        {% trans 'Login again to navigate and find directions.' %}
+    </p>
+
+    <p>
+        <a href="{% url 'accounts:log_in' %}">{% trans 'Log in again' %}</a>
+    </p>
+
+{% endblock %}

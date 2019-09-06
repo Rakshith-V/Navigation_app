@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Interactive maps for Django web apps</title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.2.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.2.0/mapbox-gl.css' rel='stylesheet' />
+  </head>
+  <body>
+  <a class="nav-link" style="font-size:20px;color:goldenrod;background-color:grey;padding:1.5rem;float:right;margin-right:3em;" href="https://github.com/Rakshith-V/navigation_app_django">Navigation-APP</a>
+  <!--JS and css links for mapbox js direction plugin-->
+  <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.2/mapbox-gl-directions.js'></script>
+  <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.2/mapbox-gl-directions.css' type='text/css' />
+   <div id='map' style='width:1550px; height: 500px; padding-top:1em;'></div>
+    <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoicmFrc2hpdGh2NDYiLCJhIjoiY2swNnNldmxlM3I2bzNscDB6c25qeTY4MCJ9.kr3GX-6hxKNrHsYYRG0qaA';
+    var map = new mapboxgl.Map({
+    container: 'map',
+     style: 'mapbox://styles/mapbox/satellite-streets-v10',
+     center: [ 77.650823, 12.912347],
+     zoom: 12
+    });
+
+  //Pop up for Perpule
+  map.on('load', function () {
+  // Add a layer showing the places.
+  map.addLayer({
+  "id": "places",
+  "type": "symbol",
+  "source": {
+  "type": "geojson",
+  "data": {
+  "type": "FeatureCollection",
+  "features": [{
+  "type": "Feature",
+  "properties": {
+  "title":"Perpule",
+  "description": "<strong>Perpule  </strong><p><a href=\"http://www.perpule.com\" target=\"_blank\" title=\"Opens in a new window\">Perpule  </a> is an app for express Self-Checkouts and easy payments in Perpule's partnered stores like Hypercity.</p>",
+  "image": 'https://india.zonestartups.com/wp-content/uploads/sites/10/2017/12/Perpule-logo.jpg',
+  "icon": "entrance"
+  },
+  "geometry": {
+  "type": "Point",
+  "coordinates": [77.650823, 12.912347]
+  }
+  }]
+  }
+  },
+  "layout": {
+  "icon-image": "{icon}-15",
+  "icon-allow-overlap": true
+  }
+  });
+  
+  // When a click event occurs on a feature in the places layer, open a popup at the
+  // location of the feature, with description HTML from its properties.
+  map.on('click', 'places', function (e) {
+  var coordinates = e.features[0].geometry.coordinates.slice();
+  var description = e.features[0].properties.description;
+  
+  // Ensure that if the map is zoomed out such that multiple
+  // copies of the feature are visible, the popup appears
+  // over the copy being pointed to.
+  while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+  coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+  }
+  
+  new mapboxgl.Popup()
+  .setLngLat(coordinates)
+  .setHTML(description)
+  .addTo(map);
+  });
+  
+  // Change the cursor to a pointer when the mouse is over the places layer.
+  map.on('mouseenter', 'places', function () {
+  map.getCanvas().style.cursor = 'pointer';
+  });
+  
+  // Change it back to a pointer when it leaves.
+  map.on('mouseleave', 'places', function () {
+  map.getCanvas().style.cursor = '';
+  });
+  });
+
+
+
+map.addControl(new MapboxDirections({
+accessToken: mapboxgl.accessToken
+}), 'top-left');
+</script>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+    <br><br><p><i>Select a source and destination. You can either search or click on the map</i></p><hr>
+  </body>
+</html>
+
+
+<b>Perpule</b> (highlighted in the middle) <p style="float:right;padding-right:2em;">[+/doubleclick to zoom-in , - to zoom-out]</p><br>
+1st Sector<br>
+HSR Layout, Bengaluru, Karnataka
