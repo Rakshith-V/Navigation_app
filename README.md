@@ -4,6 +4,7 @@
 
 An application that provies turn-by-turn directions,ETA and shortest path on the map after choosing the source and destination point on an interactive and responsive satellite view map(can be made into street easily.) It also implements  basic login features using Django rest framework that user Oauth(token) in activation links sent through emails(Only production). The application, on successful login lets you use the navigation features on a map and find efficient routes. It is also centered so as to point to perpule to find places closeby.
 
+>Requirements.txt file contains the dependencies to run it locally.
 
 # Login
 
